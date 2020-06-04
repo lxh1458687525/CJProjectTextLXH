@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <!--用来显示网头部的文字信息的标签-->
+    <title>081417110李学华</title>
+    <!--link标签用来链接外部资源的标签-->
+    <link rel="short icon" href="Resource/icon.png">
+
+    <link rel="stylesheet" href="ExternalStyle.css">
+    <script type="text/javascript" src="CommonJS.js"></script>
+    <style>
+        article{
+            margin: 20px;
+        }
+        h3{
+            color: red;
+            font-size: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dddddd;
+        }
+        h4{
+            font-size: 14px;
+        }
+        p{
+            font-size: 12px;
+            text-indent: 2em;
+            /*2em是两倍*/
+            line-height:2em;
+        }
+    </style>
+</head>
+<body>
+<header>
+<!--用来显示少量的文字信息-->
+<span>平台风采</span>
+</header>
+
+<!--h5里面新增的语义化标签,它没有特殊的意义,仅是用来增强程序的可读性-->
+<section class="common_section">
+    <!--用来展示图片用的标签-->
+    <img id="bannerImg" src="Resource/banner-1.png" alt="">
+</section>
+
+<!--第三部分-->
+<article>
+    <h3 id="title"></h3>
+    <h4 id="subTitle"></h4>
+    <p id="info"></p>
+
+
+</article>
+
+<footer>
+    <a href="DropletService.html"> <img src="Resource/nav10.png" alt=""> <span>小滴服务</span> </a>
+    <a href="BusinessProject.html"> <img src="Resource/nav20.png" alt=""> <span>企业项目</span> </a>
+    <a href="ServiceProcess.html"> <img src="Resource/nav30.png" alt=""> <span>服务流程</span> </a>
+    <a href=""> <img src="Resource/nav41.png" alt=""> <span  style="color: red">平台风采</span> </a>
+    <a href="MyDroplet.html"> <img src="Resource/nav50.png" alt=""> <span>我的小滴</span> </a>
+</footer>
+
+    <script>
+
+        function assign(obj) {
+            var title_tag = document.getElementById("title");
+            var subTitle_tag = document.getElementById("subTitle");
+            var info_tag = document.getElementById("info");
+
+            title_tag.innerHTML = obj.title;
+            subTitle_tag.innerHTML = obj.subTitle;
+            info_tag.innerHTML = obj.info;
+        }
+
+
+        //这一步获取的是字符串
+        var obj_text = JSON.parse(localStorage.getItem("platform_json"));
+
+
+        //我们需要获取json串
+        //二者区别，json是大括号包围的，字符串还有双引号包裹
+        //需要加上JSON.parse()
+
+
+        if(obj_text){
+            var obj = obj_text.data;
+            assign(obj);
+        }else{
+
+
+
+            requestMethod('get','aboutus',"",function (obj,obj1) {
+                assign(obj);
+                window.localStorage.setItem("platofrm_json",obj1);
+
+            });
+
+
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>
